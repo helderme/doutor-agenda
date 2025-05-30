@@ -1,3 +1,5 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -27,13 +29,7 @@ import { authClient } from "@/lib/auth-client";
 
 const registerSchema = z.object({
   name: z.string().trim().min(1, { message: "Nome é obrigatório" }).max(50),
-  email: z
-    .string()
-    .trim()
-    .email({ message: "Email inválido" })
-    .refine((email) => email.endsWith("@gmail.com"), {
-      message: "Email deve ser do Gmail",
-    }),
+  email: z.string().trim().email({ message: "Email inválido" }),
   password: z
     .string()
     .trim()
